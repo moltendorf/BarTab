@@ -1,6 +1,6 @@
-<!ENTITY prefwindow.title "BarTab preferences">
-<!ENTITY prefpane.title "BarTab preferences">
-<!ENTITY group.label "BarTab preferences">
+<!ENTITY prefwindow.title "BarTab Plus preferences">
+<!ENTITY prefpane.title "BarTab Plus preferences">
+<!ENTITY group.label "BarTab Plus preferences">
 <!ENTITY restoredTabs.label "When restoring tabs from a previous session: ">
 <!ENTITY restoredTabs.accesskey "R">
 <!ENTITY backgroundTabs.label "When opening tabs in the background: ">
