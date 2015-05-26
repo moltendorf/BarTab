@@ -10,5 +10,5 @@ locale    bartab   fr            locale/fr/
 locale    bartab   ru            locale/ru/
 locale    bartab   es-ES         locale/es-ES/
 
-overlay   chrome://browser/content/browser.xul chrome://bartab/content/browser.xul
-overlay   chrome://navigator/content/navigator.xul chrome://bartab/content/browser.xul
+overlay   chrome://browser/content/browser.xul chrome://bartabplus/content/browser.xul
+overlay   chrome://navigator/content/navigator.xul chrome://bartabplus/content/browser.xul

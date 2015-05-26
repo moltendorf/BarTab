@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
   <Description about="urn:mozilla:install-manifest">
-    <em:id>BarTabPlus.Firefox@moltendorf.net</em:id>
+    <em:id>bartab-plus.firefox@moltendorf.net</em:id>
     <em:type>2</em:type>
+    <em:unpack>true</em:unpack>
     <em:name>BarTab Plus</em:name>
     <em:version>3.2.2</em:version>
-    <em:homepageURL>https://addons.mozilla.org/en-US/firefox/addon/bartab-heavy/</em:homepageURL>
+    <em:homepageURL>https://addons.mozilla.org/en-US/firefox/addon/bartab-plus/</em:homepageURL>
     <em:creator>Philipp von Weitershausen</em:creator>
     <em:contributor>SHIMODA Hiroshi</em:contributor>
     <em:contributor>Paul O'Shannessy</em:contributor>
@@ -19,11 +20,11 @@
     <em:translator>Felipe Barousse Boué [es]</em:translator>
     <em:translator>Danny Navarro [es-ES]</em:translator>
     <em:optionsURL>chrome://bartab/content/preferences.xul</em:optionsURL>
-    <!-- Firefox -->
     <em:targetApplication>
       <Description>
-        <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
-        <em:minVersion>4.0b1</em:minVersion>
+        <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id> <!-- Firefox -->
+        <em:minVersion>38.0</em:minVersion>
+        <em:maxVersion>38.*</em:maxVersion>
       </Description>
     </em:targetApplication>
   </Description>
