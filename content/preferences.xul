@@ -11,9 +11,6 @@
   <prefpane id="bartab-prefpane" label="&prefpane.title;">
 
     <preferences>
-      <preference id="extensions.bartab.loadRestoredTabs"
-                  name="extensions.bartab.loadRestoredTabs"
-                  type="bool" />
       <preference id="extensions.bartab.loadBackgroundTabs"
                   name="extensions.bartab.loadBackgroundTabs"
                   type="bool" />
@@ -44,21 +41,6 @@
           <column />
         </columns>
         <rows>
-
-    <row align="center">
-      <label value="&restoredTabs.label;"
-             accesskey="&restoredTabs.accesskey;"
-             control="menuRestoredTabs" />
-      <menulist id="menuRestoredTabs"
-                preference="extensions.bartab.loadRestoredTabs">
-        <menupopup>
-          <menuitem label="&loadTabs.label;" value="true"/>
-          <menuitem label="&dontLoadTabs.label;" value="false"/>
-        </menupopup>
-      </menulist>
-    </row>
-
-    <separator class="thin"/>
 
     <row align="center">
       <label value="&backgroundTabs.label;"

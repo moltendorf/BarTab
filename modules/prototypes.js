@@ -1108,7 +1108,7 @@ var BarTabUtils = {
 					branch.setBoolPref("loadBackgroundTabs", !branch.getBoolPref("loadBackgroundTabs"));
 				}
 
-				if (branch.prefHasUserValue("loadRestoredTabs")) { // No need to check types; they're enforced by pref.js.
+				if (branch.prefHasUserValue("loadRestoredTabs") && branch.getPrefType("loadRestoredTabs") === Ci.nsIPrefBranch.PREF_BOOL) {
 					branch.setBoolPref("loadRestoredTabs", !branch.getBoolPref("loadRestoredTabs"));
 				}
 			} catch (exception) {
@@ -1116,7 +1116,20 @@ var BarTabUtils = {
 			}
 		}
 
-		branch.setIntPref("configVersion", 2);
+		if (version < 3) {
+			try {
+				/*
+				 * loadRestoredTabs does not appear to do anything. Remove it.
+				 */
+				if (branch.prefHasUserValue("loadRestoredTabs")) {
+					branch.deleteBranch("loadRestoredTabs");
+				}
+			} catch (exception) {
+				// Keep on truckin'.
+			}
+		}
+
+		branch.setIntPref("configVersion", 3);
 	},
 
 	/*
