@@ -13,10 +13,10 @@
     <preferences>
       <preference id="extensions.bartab.loadRestoredTabs"
                   name="extensions.bartab.loadRestoredTabs"
-                  type="int" />
+                  type="bool" />
       <preference id="extensions.bartab.loadBackgroundTabs"
                   name="extensions.bartab.loadBackgroundTabs"
-                  type="int" />
+                  type="bool" />
       <preference id="extensions.bartab.unloadAfterTimeout"
                   name="extensions.bartab.unloadAfterTimeout"
                   type="bool" />
@@ -52,8 +52,8 @@
       <menulist id="menuRestoredTabs"
                 preference="extensions.bartab.loadRestoredTabs">
         <menupopup>
-          <menuitem label="&loadTabs.label;" value="0"/>
-          <menuitem label="&dontLoadTabs.label;" value="1"/>
+          <menuitem label="&loadTabs.label;" value="true"/>
+          <menuitem label="&dontLoadTabs.label;" value="false"/>
         </menupopup>
       </menulist>
     </row>
@@ -67,8 +67,8 @@
       <menulist id="menuBackgroundTabs"
                 preference="extensions.bartab.loadBackgroundTabs">
         <menupopup>
-          <menuitem label="&loadTabs.label;" value="0"/>
-          <menuitem label="&dontLoadTabs.label;" value="1"/>
+          <menuitem label="&loadTabs.label;" value="true"/>
+          <menuitem label="&dontLoadTabs.label;" value="false"/>
         </menupopup>
       </menulist>
     </row>

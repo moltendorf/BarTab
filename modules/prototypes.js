@@ -73,7 +73,7 @@ BarTabHandler.prototype = {
 	 */
 	onTabOpen: function (aEvent) {
 		var tab = aEvent.originalTarget;
-		if (tab.selected || !BarTabUtils.getPref("loadBackgroundTabs")) {
+		if (tab.selected || BarTabUtils.getPref("loadBackgroundTabs")) {
 			return;
 		}
 		tab.setAttribute("ontab", "true");
@@ -820,8 +820,7 @@ BarTabTimer.prototype = {
 
 	onTabOpen: function (aEvent) {
 		var tab = aEvent.originalTarget;
-		if (tab.selected
-			|| (BarTabUtils.getPref("loadBackgroundTabs") == 1)) {
+		if (tab.selected || BarTabUtils.getPref("loadBackgroundTabs")) {
 			return;
 		}
 		this.startTimer(tab);
@@ -1018,56 +1017,106 @@ var BarTabUtils = {
 	},
 
 	migratePrefs: function () {
-		if (this.getPref("migrated")) {
-			return;
+		let branch = this.mPrefBranch;
+
+		let version = branch.getIntPref("configVersion");
+
+		try {
+			if (branch.prefHasUserValue("migrated")) {
+				if (branch.getBoolPref("migrated")) {
+					version = 1;
+				}
+
+				branch.deleteBranch("migrated");
+			}
+		} catch (exception) {
+			// Keep on truckin'.
 		}
 
-		// Grab the list of old pref names
-		let newBranch = BarTabUtils.mPrefBranch;
-		let oldBranch = BarTabUtils.mPrefs.getBranch("extensions.bartap.");
-		let oldPrefNames = oldBranch.getChildList("", {});
-		let value;
+		if (version < 1) {
+			try {
+				// Grab the list of old pref names
+				let oldBranch = BarTabUtils.mPrefs.getBranch("extensions.bartap.");
+				let oldPrefNames = oldBranch.getChildList("", {});
+				let value;
 
-		for each (let pref in oldPrefNames) {
-			switch (pref) {
-				case "tapBackgroundTabs":
-					value = oldBranch.getBoolPref(pref);
-					newBranch.setIntPref("loadBackgroundTabs", 0 + value);
-					break;
+				for each (let pref in oldPrefNames) {
+					try {
+						switch (pref) {
+							// findClosestLoadedTab
+							case "findClosestUntappedTab":
+								value = oldBranch.getBoolPref(pref);
+								branch.setBoolPref("findClosestLoadedTab", value);
+								break;
 
-				case "tapAfterTimeout":
-					value = oldBranch.getBoolPref(pref);
-					newBranch.setBoolPref("unloadAfterTimeout", value);
-					break;
+							// loadBackgroundTabs
+							case "tapBackgroundTabs":
+								value = oldBranch.getBoolPref(pref, true);
+								branch.setBoolPref("loadBackgroundTabs", value);
+								break;
 
-				case "loadOnSelect":
-					value = oldBranch.getBoolPref(pref);
-					if (value) {
-						value = oldBranch.getBoolPref("loadOnSelectDelay");
+							// loadOnSelectDelay
+							case "loadOnSelect":
+								value = oldBranch.getBoolPref(pref);
+								if (value) {
+									value = oldBranch.getIntPref("loadOnSelectDelay");
+								}
+								branch.setIntPref("loadOnSelectDelay", 0 + value);
+								break;
+
+							case "timeoutUnit":
+							case "timeoutValue":
+								value = oldBranch.getIntPref(pref);
+								branch.setIntPref(pref, value);
+								break;
+
+							// unloadAfterTimeout
+							case "tapAfterTimeout":
+								value = oldBranch.getBoolPref(pref, true);
+								branch.setBoolPref("unloadAfterTimeout", value);
+								break;
+
+							// whitelist
+							case "hostWhitelist":
+								value = oldBranch.getCharPref(pref);
+								branch.setCharPref("whitelist", value);
+								break;
+						}
+					} catch (exception) {
+						// Keep on truckin'.
 					}
-					newBranch.setIntPref("loadOnSelectDelay", 0 + value);
-					break;
+				}
+			} catch (exception) {
+				// Keep on truckin'.
+			}
 
-				case "loadOnSelectDelay":
-					break;
-
-				case "findClosestUntappedTab":
-					value = oldBranch.getBoolPref(pref);
-					newBranch.setBoolPref("findClosestLoadedTab", value);
-					break;
-
-				case "hostWhitelist":
-					value = oldBranch.getCharPref(pref);
-					newBranch.setCharPref("whitelist", value);
-					break;
-
-				default:
-					value = oldBranch.getIntPref(pref);
-					newBranch.setIntPref(pref, value);
+			try {
+				oldBranch.deleteBranch("");
+			} catch (exception) {
+				// Keep on truckin'.
 			}
 		}
-		oldBranch.deleteBranch("");
-		newBranch.setBoolPref("migrated", true);
+
+		if (version < 2) {
+			try {
+				/* Seriously these are confusing, let's change it to a boolean and invert it.
+				 * It appears the previous fork was attempting to change these to delays?
+				 * If we choose to follow suit, we should change the preference name to include "delay" in the name.
+				 */
+
+				if (branch.prefHasUserValue("loadBackgroundTabs")) { // No need to check types; they're enforced by pref.js.
+					branch.setBoolPref("loadBackgroundTabs", !branch.getBoolPref("loadBackgroundTabs"));
+				}
+
+				if (branch.prefHasUserValue("loadRestoredTabs")) { // No need to check types; they're enforced by pref.js.
+					branch.setBoolPref("loadRestoredTabs", !branch.getBoolPref("loadRestoredTabs"));
+				}
+			} catch (exception) {
+				// Keep on truckin'.
+			}
+		}
+
+		branch.setIntPref("configVersion", 2);
 	},
 
 	/*
