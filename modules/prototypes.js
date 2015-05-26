@@ -530,6 +530,10 @@ BarTabWebNavigation.prototype = {
 
 	/*** Hook into loadURI() ***/
 
+	loadURIWithOptions: function (aURI) {
+		return this.loadURI(aURI, 0, null, null, null);
+	},
+
 	loadURI: function (aURI) {
 		// Allow about:blank to load without any side effects.
 		if (aURI
