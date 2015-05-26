@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
   <Description about="urn:mozilla:install-manifest">
-    <em:id>bartabheavy@philikon.de</em:id>
+    <em:id>BarTabPlus.Firefox@moltendorf.net</em:id>
     <em:type>2</em:type>
-    <em:name>BarTab Heavy</em:name>
+    <em:name>BarTab Plus</em:name>
     <em:version>3.2.2</em:version>
     <em:homepageURL>https://addons.mozilla.org/en-US/firefox/addon/bartab-heavy/</em:homepageURL>
     <em:creator>Philipp von Weitershausen</em:creator>
