@@ -530,8 +530,9 @@ BarTabWebNavigation.prototype = {
 
 	/*** Hook into loadURI() ***/
 
-	loadURIWithOptions: function (aURI) {
-		return this.loadURI(aURI, 0, null, null, null);
+	/* A dirty hack. */
+	loadURIWithOptions: function (aURI, aLoadFlags, aReferrer) {
+		return this.loadURI(aURI, aLoadFlags, aReferrer, null, null);
 	},
 
 	loadURI: function (aURI) {
