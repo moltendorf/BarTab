@@ -554,6 +554,14 @@ BarTabWebNavigation.prototype = {
 			return original.loadURI.apply(original, arguments);
 		}
 
+		// Stop BarTabWebProgressListener from creating an infinite loop.
+		this._tab.setAttribute("ontab1", "true");
+
+		// 2048 is LOAD_FLAGS_STOP_CONTENT
+		this._original.loadURI.call(this._original, aURI, aLoadFlags | 2048, aReferrer, null, null);
+
+		this._tab.removeAttribute("ontab1");
+
 		this._tab.removeAttribute("busy");
 		let window = this._tab.ownerDocument.defaultView;
 		if (aReferrer) {
@@ -735,6 +743,13 @@ BarTabWebProgressListener.prototype = {
 
 		// Allow whitelisted URIs to load.
 		let browser = this._tab.linkedBrowser;
+
+		if (this._tab.getAttribute("ontab1") == "true") {
+			browser.stop();
+
+			return;
+		}
+
 		if (BarTabUtils.whiteListed(uri)) {
 			this._tab.removeAttribute("ontab");
 			// webNavigation.unhook() will call our unhook.
