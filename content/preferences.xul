@@ -97,7 +97,7 @@
         <description style="font: small-caption;
                             font-weight: normal;
                             width: 0; /* trigger word wrapping */
-                            margin: 0.5em 1em 0em 1em;">&hostWhitelist.description;</description>
+                            margin: 0.5em 1em 0 1em;">&hostWhitelist.description;</description>
       </vbox>
       <listbox id="whitelist"
                flex="1"
