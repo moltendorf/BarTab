@@ -534,10 +534,17 @@ BarTabWebNavigation.prototype = {
 
 	/* A dirty hack. */
 	loadURIWithOptions: function (aURI, aLoadFlags, aReferrer) {
+		if (this._tab.getAttribute("ontab1") == "true") {
+			return;
+		}
 		return this.loadURI(aURI, aLoadFlags, aReferrer, null, null);
 	},
 
 	loadURI: function (aURI) {
+		if (this._tab.getAttribute("ontab1") == "true") {
+			return;
+		}
+
 		// Allow about:blank to load without any side effects.
 		if (aURI
 			&& (aURI != "about:blank")
