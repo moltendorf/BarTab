@@ -188,6 +188,7 @@ BarTabHandler.prototype = {
 			return;
 		}
 		aTab.removeAttribute("ontab");
+		aTab.removeAttribute("ontab1");
 		aTab.linkedBrowser.webNavigation._resume();
 	},
 
@@ -502,6 +503,7 @@ BarTabWebNavigation.prototype = {
 		var entry = history.getEntryAtIndex(aIndex, false);
 		if (BarTabUtils.whiteListed(entry.URI)) {
 			this._tab.removeAttribute("ontab");
+			this._tab.removeAttribute("ontab1");
 			return this._original.gotoIndex(aIndex);
 		}
 
@@ -550,6 +552,7 @@ BarTabWebNavigation.prototype = {
 		if (BarTabUtils.whiteListed(uri)) {
 			let original = this._original;
 			this._tab.removeAttribute("ontab");
+			this._tab.removeAttribute("ontab1");
 			this.unhook();
 			return original.loadURI.apply(original, arguments);
 		}
@@ -559,8 +562,6 @@ BarTabWebNavigation.prototype = {
 
 		// 2048 is LOAD_FLAGS_STOP_CONTENT
 		this._original.loadURI.call(this._original, aURI, aLoadFlags | 2048, aReferrer, null, null);
-
-		this._tab.removeAttribute("ontab1");
 
 		this._tab.removeAttribute("busy");
 		let window = this._tab.ownerDocument.defaultView;
@@ -608,6 +609,7 @@ BarTabWebNavigation.prototype = {
 	reload: function (aReloadFlags) {
 		if (this._tab.getAttribute("ontab") == "true") {
 			this._tab.removeAttribute("ontab");
+			this._tab.removeAttribute("ontab1");
 			//TODO should we patch aReloadFlags into this._loaduri_args?
 			return this._resume();
 		}
@@ -679,6 +681,7 @@ BarTabRestoreProgressListener.prototype = {
 
 	onStateChange: function (aWebProgress, aRequest, aStateFlags, aStatus) {
 		this._tab.removeAttribute("ontab");
+		this._tab.removeAttribute("ontab1");
 		this.unhook();
 	},
 	onProgressChange: function () {
@@ -745,6 +748,7 @@ BarTabWebProgressListener.prototype = {
 		let browser = this._tab.linkedBrowser;
 
 		if (this._tab.getAttribute("ontab1") == "true") {
+			this._tab.removeAttribute("ontab1");
 			browser.stop();
 
 			return;
@@ -752,6 +756,7 @@ BarTabWebProgressListener.prototype = {
 
 		if (BarTabUtils.whiteListed(uri)) {
 			this._tab.removeAttribute("ontab");
+			this._tab.removeAttribute("ontab1");
 			// webNavigation.unhook() will call our unhook.
 			browser.webNavigation.unhook();
 			return;
