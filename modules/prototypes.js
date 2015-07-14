@@ -484,8 +484,12 @@ BarTabWebNavigation.prototype = {
 		// No longer lie about the URI.  Otherwise the docshell might
 		// not want to load the page (especially seems to happen with
 		// fragment URIs).
-		var blankURI = BarTabUtils.makeURI("about:blank");
-		this._tab.linkedBrowser.docShell.setCurrentURI(blankURI);
+		//var blankURI = BarTabUtils.makeURI("about:blank");
+		try {
+			this._tab.linkedBrowser.docShell.setCurrentURI(blankURI);
+		} catch (exception) {
+			// Probably running multi-process.
+		}
 	},
 
 
@@ -575,15 +579,25 @@ BarTabWebNavigation.prototype = {
 		if (aReferrer) {
 			// Fake the docshell's currentURI.  (This will also affect
 			// window.location etc.)
-			this._tab.linkedBrowser.docShell.setCurrentURI(uri);
-			window.setTimeout(BarTabUtils.setTitleAndIcon, 0, this._tab, uri);
+			// null but doesn't seem to fail?
+			try {
+				this._tab.linkedBrowser.docShell.setCurrentURI(uri);
+			} catch (exception) {
+				// Probably running multi-process.
+			}
+
+			window.setTimeout(BarTabUtils.setTitleAndIcon, 100, this._tab, uri);
 		} else {
 			// If there's no referrer, it's likely that we were opened
 			// from an external application which somehow sets up things
 			// like tab title and currentURI later.  Avoid the race
 			// with an increased timeout.
-			window.setTimeout(this._tab.linkedBrowser.docShell.setCurrentURI,
-				100, uri);
+			try {
+				window.setTimeout(this._tab.linkedBrowser.docShell.setCurrentURI, 100, uri);
+			} catch (exception) {
+				// Probably running multi-process.
+			}
+
 			window.setTimeout(BarTabUtils.setTitleAndIcon, 100, this._tab, uri);
 		}
 
