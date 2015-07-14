@@ -31,3 +31,7 @@
 <!ENTITY closingTabs.label "При закрытии вкладки:">
 <!ENTITY closingTabs.accesskey "З">
 <!ENTITY findClosestLoadedTab.label "выбирать ближайшую загруженную вкладку">
+<!ENTITY unloadingOtherTabs.label "При разгрузке все, кроме текущей вкладке:">
+<!ENTITY unloadingOtherTabs.accesskey "U">
+<!ENTITY unloadAllTabsInWindow.label "выгрузить вкладки из всех групп в текущем окне">
+<!ENTITY unloadOnlyVisibleTabs.label "выгрузить только вкладки из активного закладке группы">

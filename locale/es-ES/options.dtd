@@ -31,3 +31,7 @@
 <!ENTITY closingTabs.label "Cuando cierre una pestaña:">
 <!ENTITY closingTabs.accesskey "C">
 <!ENTITY findClosestLoadedTab.label "seleccionar la pestaña cargada más cercana">
+<!ENTITY unloadingOtherTabs.label "Al descargar todos menos la ficha actual:">
+<!ENTITY unloadingOtherTabs.accesskey "U">
+<!ENTITY unloadAllTabsInWindow.label "descargar fichas de todos los grupos en la ventana actual">
+<!ENTITY unloadOnlyVisibleTabs.label "descargar sólo lengüetas del grupo pestaña actualmente activa">

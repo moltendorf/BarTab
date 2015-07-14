@@ -31,3 +31,7 @@
 <!ENTITY closingTabs.label "Zamykając kartę:">
 <!ENTITY closingTabs.accesskey "C">
 <!ENTITY findClosestLoadedTab.label "przechodź do najbliższej załadowanej karty">
+<!ENTITY unloadingOtherTabs.label "Podczas rozładunku wszystkich, ale na bieżącej karcie:">
+<!ENTITY unloadingOtherTabs.accesskey "U">
+<!ENTITY unloadAllTabsInWindow.label "rozładunku karty wszystkich grup w bieżącym oknie">
+<!ENTITY unloadOnlyVisibleTabs.label "rozładować tylko karty z aktualnie aktywnych grup zakładki">

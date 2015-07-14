@@ -31,3 +31,7 @@
 <!ENTITY closingTabs.label "Lors de la fermeture d'un onglet:">
 <!ENTITY closingTabs.accesskey "C">
 <!ENTITY findClosestLoadedTab.label "sélectionner l'onglet chargé le plus proche">
+<!ENTITY unloadingOtherTabs.label "Lors du déchargement de tous, mais l'onglet courant:">
+<!ENTITY unloadingOtherTabs.accesskey "U">
+<!ENTITY unloadAllTabsInWindow.label "décharger onglets de tous les groupes dans la fenêtre actuelle">
+<!ENTITY unloadOnlyVisibleTabs.label "décharger seulement onglets du groupe d'onglets actuellement actif">

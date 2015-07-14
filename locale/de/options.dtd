@@ -31,3 +31,7 @@
 <!ENTITY closingTabs.label "Wenn ein Tab geschlossen wird:">
 <!ENTITY closingTabs.accesskey "C">
 <!ENTITY findClosestLoadedTab.label "das nächste geladene Tab auswählen">
+<!ENTITY unloadingOtherTabs.label "Beim Entladen alle, aber die aktuelle Registerkarte:">
+<!ENTITY unloadingOtherTabs.accesskey "U">
+<!ENTITY unloadAllTabsInWindow.label "entladen Registerkarten aus allen Gruppen im aktuellen Fenster">
+<!ENTITY unloadOnlyVisibleTabs.label "Entladen nur Registerkarten aus der aktuell aktiven Registerkarte Gruppe">

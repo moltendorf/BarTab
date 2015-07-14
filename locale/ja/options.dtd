@@ -31,3 +31,7 @@
 <!ENTITY closingTabs.label "タブを閉じた場合:">
 <!ENTITY closingTabs.accesskey "C">
 <!ENTITY findClosestLoadedTab.label "最寄りの読み込まれているタブを選択する">
+<!ENTITY unloadingOtherTabs.label "現在のタブが、すべてをアンロードする場合:">
+<!ENTITY unloadingOtherTabs.accesskey "U">
+<!ENTITY unloadAllTabsInWindow.label "現在のウィンドウ内のすべてのグループからのタブをアンロード">
+<!ENTITY unloadOnlyVisibleTabs.label "現在アクティブなタブグループからタブのみをアンロード">
